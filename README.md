@@ -2,9 +2,9 @@
 title: git-watcher
 ---
 
-[中文版](./README_zh.md)
-
 # git-watcher
+
+[中文版](./README_zh.md)
 
 **Git Version Control for OpenClaw Configuration Files.**
 
