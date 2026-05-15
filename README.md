@@ -2,82 +2,84 @@
 title: git-watcher
 ---
 
+[中文版](./README_zh.md)
+
 # git-watcher
 
-**Git 版本控制 for OpenClaw 配置文件。**
+**Git Version Control for OpenClaw Configuration Files.**
 
-📦 安装：`clawhub install git-watcher`
-📂 GitHub：`https://github.com/Wangjipeng977/openclaw-git-manager`
-
----
-
-## 一句话
-
-每次改配置都自动记录 diff，改崩了可以一键回滚，再也不用"我不知道改了什么导致坏了"。
+📦 Install: `clawhub install git-watcher`
+📂 GitHub: `https://github.com/Wangjipeng977/openclaw-git-manager`
 
 ---
 
-## 解决了什么问题
+## One-Liner
 
-你在 OpenClaw 里改了配置，过了一周发现某个功能不 work 了，但你：
-- 不记得改了什么
-- 不记得是什么时候改的
-- 只能一个个试
-
-这个技能把你的 `openclaw.json`、`credentials/`、`agents/` 等配置文件全部纳入 git 版本控制，每次变更都有记录、可比较、可撤销。
+Every config change is automatically tracked with diff — rollback to any previous version with one command. No more "I have no idea what broke."
 
 ---
 
-## 核心功能
+## Problem It Solves
 
-| 命令 | 作用 |
-|------|------|
-| `commit` | 一键提交当前配置状态，自动生成 key 级别的 diff 说明 |
-| `log` | 查看历史提交，每条都说明"什么文件、什么变化" |
-| `diff` | 比较任意两个版本之间的差异 |
-| `restore <hash>` | 回滚到指定版本，自动验证 + 提示重启 |
-| `undo` | 撤销上次 restore 操作 |
+You changed something in OpenClaw, a week later a feature stops working and you:
+- Can't remember what you changed
+- Can't remember when you changed it
+- Have to trial-and-error everything
 
----
-
-## 安全保证
-
-- **Credentials 自动 redact**：真实 API key 永远不进 git 提交，commit 里只显示 `[REDACTED-api-key]`
-- **敏感文件隔离**：日志、媒体、记忆文件完全不跟踪
-- **完整 audit trail**：`.secrets-log.json` 记录每次 redact 的时间、文件、类型
+This skill puts your `openclaw.json`, `credentials/`, `agents/` and other config files under git version control. Every change is logged, comparable, and reversible.
 
 ---
 
-## 使用示例
+## Core Commands
+
+| Command | What It Does |
+|---------|-------------|
+| `commit` | One-shot commit of current config state, auto-generates key-level diff summary |
+| `log` | View history — each entry shows "which files, what changed" |
+| `diff` | Compare any two versions |
+| `restore <hash>` | Rollback to specified version with auto-validation + restart hints |
+| `undo` | Undo the last restore operation |
+
+---
+
+## Safety Guarantees
+
+- **Credentials auto-redacted**: Real API keys never enter git commits — they show as `[REDACTED-api-key]`
+- **Sensitive files excluded**: Logs, media, and memory files are never tracked
+- **Full audit trail**: `.secrets-log.json` records every redact with timestamp, file, and type
+
+---
+
+## Usage Examples
 
 ```
-# 第一次使用
+# First time setup
 python3 git_manager.py init
 
-# 每次改配置后
+# After any config change
 python3 git_manager.py commit
-# → 自动显示 diff 说明，比如：
+# → Auto-shows diff summary like:
 #   ~agent:main:dashboard.estimatedCostUsd: 0.066 → 0.005
 
-# 出问题了回滚
-python3 git_manager.py log          # 找到好用的版本
-python3 git_manager.py restore a1b2c3d  # 回滚
-# → 自动跑 openclaw gateway doctor 验证，告诉你下一步做什么
+# Something broke? Rollback
+python3 git_manager.py log          # find a working version
+python3 git_manager.py restore a1b2c3d  # rollback
+# → Auto-runs openclaw gateway doctor to validate, tells you next steps
 ```
 
 ---
 
-## 安装
+## Install
 
 ```bash
-# 通过 clawhub 安装（推荐）
+# Via clawhub (recommended)
 clawhub install git-watcher
 
-# 或手动安装
+# Or manual
 cp -r openclaw-git-manager/ ~/.openclaw/workspace/skills/
 ```
 
-触发词：`commit the config` / `save this version` / `what changed` / `restore` / `rollback` / `git manager` / `git-watcher`
+Trigger phrases: `commit the config` / `save this version` / `what changed` / `restore` / `rollback` / `git manager` / `git-watcher`
 
 ---
 
