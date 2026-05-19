@@ -1,11 +1,9 @@
-[English](./README.md)
-
 ---
 title: git-watcher
 ---
 
 # git-watcher
-
+[English](./README.md)
 **Git 版本控制 for OpenClaw 配置文件。**
 
 📦 安装：`clawhub install git-watcher`
