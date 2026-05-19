@@ -1,7 +1,3 @@
----
-title: git-watcher
----
-
 # git-watcher
 
 [中文版](./README_zh.md)
